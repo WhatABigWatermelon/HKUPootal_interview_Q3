@@ -27,7 +27,6 @@ watch(email, (newInput, oldInput) => {
     isValid.value = true //假设合法，进行最后一步校验
     for (var i = 0; i < prefix.length; i++) {
       var ascCode = prefix.charCodeAt(i)
-      console.log(ascCode)
 
       //数字的ascii码 [48, 57], 大写字母的ascii码 [65, 90], 小写字母的ascii码 [97，122]
       if (
@@ -51,38 +50,56 @@ watch(email, (newInput, oldInput) => {
 </script>
 
 <template>
-  <body>
-    <h3 class="wrapper">
+  <div class="container">
+    <p>
       <input
         type="text"
         v-model="email"
         v-bind:style="{ borderColor: inputBorderColor }"
+        id="input-window"
       />
-    </h3>
-    <h3>
-      <button :disabled="!isValid">Submit</button>
-    </h3>
-
-    <h3>{{ uid }}</h3>
-  </body>
+    </p>
+    <p>
+      <button :disabled="!isValid" id="submit-button">Submit</button>
+    </p>
+    <p id="id-text">{{ uid }}</p>
+  </div>
 </template>
 
-<style scoped>
-body {
-  line-height: 1.5;
+<style>
+.container {
+  width: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+#input-window {
+  width: 200px;
+  margin: auto 50px;
+}
+#submit-button {
+  width: 100px;
+  margin: auto 100px;
+}
+#id-text {
+  width: 200px;
+  margin: auto 50px;
+  text-align: center;
+}
+#input-window:focus {
+  outline: none;
 }
 
-@media (min-width: 1024px) {
+@media (prefers-color-scheme: dark) {
   body {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
+    background-color: lightpink;
   }
+}
 
-  body .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
+@media (prefers-color-scheme: light) {
+  body {
+    background-color: lightgreen;
   }
 }
 </style>
