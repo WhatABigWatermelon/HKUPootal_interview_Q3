@@ -33,21 +33,21 @@ export default {
     }
   },
   watch: {
-    verify(newInput, oldInput) {
+    email(newInput, oldInput) {
       var prefix = ''
       if (newInput.length <= MIN_LENGTH) {
-        isValid.value = false
+        this.isValid = false
       } else if (
         // 后缀检查
         !newInput.endsWith(DEFAULT_CONNECT_SUFFIX) &&
         !newInput.endsWith(DEFAULT_SUFFIX)
       ) {
-        isValid.value = false
+        this.isValid = false
       } else {
         //前缀检查
-        var prefixEndPosition = email.value.indexOf('@') //后缀合法，不用判断prefixEndPosition的边界
-        prefix = email.value.substring(0, prefixEndPosition)
-        isValid.value = true //假设合法，进行最后一步校验
+        var prefixEndPosition = newInput.indexOf('@') //后缀合法，不用判断prefixEndPosition的边界
+        prefix = newInput.substring(0, prefixEndPosition)
+        this.isValid = true //假设合法，进行最后一步校验
         for (var i = 0; i < prefix.length; i++) {
           var ascCode = prefix.charCodeAt(i)
 
@@ -58,16 +58,16 @@ export default {
             (ascCode > 90 && ascCode < 97) ||
             ascCode > 122
           ) {
-            isValid.value = false
+            this.isValid = false
             break
           }
         }
       }
-      if (!isValid.value) {
-        inputBorderColor.value = 'red'
+      if (!this.isValid) {
+        this.inputBorderColor = 'red'
       } else {
-        inputBorderColor.value = 'green'
-        uid.value = prefix
+        this.inputBorderColor = 'green'
+        this.uid = prefix
       }
     },
   },
