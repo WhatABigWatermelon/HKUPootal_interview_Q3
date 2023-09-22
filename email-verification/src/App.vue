@@ -9,9 +9,11 @@
       />
     </p>
     <p>
-      <button :disabled="!isValid" id="submit-button">Submit</button>
+      <button :disabled="!isValid" id="submit-button" @click="showUid = true">
+        Submit
+      </button>
     </p>
-    <p id="id-text">{{ uid }}</p>
+    <p id="id-text" v-if="showUid && isValid">{{ uid }}</p>
   </div>
 </template>
 
@@ -29,6 +31,7 @@ export default {
       email: '',
       uid: '',
       isValid: false,
+      showUid: false,
       inputBorderColor: 'red',
     }
   },
